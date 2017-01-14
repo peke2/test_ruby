@@ -33,3 +33,19 @@ p d		#[#<Test:0x0000060041e708 @param="Hello">, #<Test:0x0000060041e708 @param="
 
 d[1].param = 'Good morning'
 p d		#[#<Test:0x0000060041e708 @param="Good morning">, #<Test:0x0000060041e708 @param="Good morning">, #<Test:0x0000060041e708 @param="Good morning">, #<Test:0x0000060041e708 @param="Good morning">, #<Test:0x0000060041e708 @param="Good morning">]
+
+
+#	初期化で悩むところ
+#	表記を単純にすることを考えるとこう書いてしまう
+#	new する際の指定に使わなければ重複して設定されない
+flags = Array.new(3)
+flags[0] = [false, false]	#	配列のそれぞれが別オブジェクトなのでOK
+flags[1] = [false, false]
+flags[2] = [false, false]
+
+p flags		#[[false, false], [false, false], [false, false]]
+flags[1][1] = true
+p flags		#[[false, false], [false, true], [false, false]]	指定された箇所のみ変更される
+
+
+
